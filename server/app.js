@@ -6,8 +6,9 @@
 
 const express = require("express")
 const multer = require("multer")
-const app = express()
-const port = 8888
+const app = express();
+const { db, genid } = require("./db/DbUtils")
+const port = 8080
 
 // 开放跨域请求
 app.use(function (req, res, next) {
@@ -28,11 +29,15 @@ const update = multer({
 })
 app.use(update.any())
 
+// 注册路由
+app.use("/test", require("./routers/TestRouter"))
+app.use("/admin", require("./routers/AdminRouter"))
+
 app.get("/", (req, res) => { 
     res.send("Hello world");
 })
 
 app.listen(port, () => {
-    console.log('启动成功: http://localhost:${port}/')
+    console.log(`启动成功 : http://localhost:${port}/`)
 })
  
