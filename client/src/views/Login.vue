@@ -23,6 +23,10 @@
 import { ref, reactive, inject } from 'vue'
 import { AdminStore } from '../stores/AdminStore'
 
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
+const route = useRoute()
+
 const message = inject("message")
 const axios = inject("axios")
 const adminStore = AdminStore()
@@ -74,6 +78,7 @@ const login = async () => {
 
 <style lang="scss" scoped>
 .login-panel {
-    margin: 0 auto;
+    width: 480px;
+    margin: 40px auto;
 }
 </style>

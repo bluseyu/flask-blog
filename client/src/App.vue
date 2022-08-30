@@ -9,6 +9,7 @@
 <style scoped>
 #app {
     display: flex;
-    justify-content: center;
+    position: relative;
+    width: 100%;
 }
 </style>
