@@ -44,9 +44,9 @@ const toPage = (menu) => {
 <style lang="scss" scoped>
 .main-panel {
     display: flex;
-    color: #64676a;
-    max-width: 1500px;
     margin: 0 auto;
+    width: 100%;
+    color: #64676a;
 }
 
 .menus {
@@ -55,7 +55,7 @@ const toPage = (menu) => {
     line-height: 55px;
     text-align: center;
     width: 180px;
-    height: 95vh;
+    height: 100vh;
     border-right: 1px solid #dadada;
 
     div {
@@ -65,6 +65,10 @@ const toPage = (menu) => {
             color: #fd760e;
         }
     }
+}
+
+.content {
+    width: calc(100% - 180px);
 }
 
 .title {

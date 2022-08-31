@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="section">
         <n-button @click="showAddModel = true">添加分类</n-button>
         <n-table :bordered="false" :single-line="false">
             <thead>
