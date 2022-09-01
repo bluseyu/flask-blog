@@ -4,7 +4,7 @@ import App from './App.vue'
 import naive from 'naive-ui'
 import { createDiscreteApi } from 'naive-ui'
 import { router } from './common/router'
-import { createPinia } from "pinia";
+import { createPinia } from "pinia"
 import axios from 'axios'
 import { AdminStore } from './stores/AdminStore'
 
@@ -20,6 +20,7 @@ app.provide("axios", axios)
 app.provide("message", message)
 app.provide("notification", notification)
 app.provide("dialog", dialog)
+app.provide("server_url", axios.defaults.baseURL)
 
 app.use(naive)
 app.use(createPinia())
@@ -35,8 +36,11 @@ app.use(router)
 */
 const adminStore = AdminStore()
 axios.interceptors.request.use((config) => {
+    //每次请求都在headers中添加token
     config.headers.token = adminStore.token
     return config
 })
 
 app.mount('#app')
+
+window.document.documentElement.setAttribute('data-theme', localStorage.getItem('data-theme') ? localStorage.getItem('data-theme') : '')

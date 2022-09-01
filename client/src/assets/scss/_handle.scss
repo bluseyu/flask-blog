@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+@import "./color";
+
+//遍历主题map
+@mixin themeify {
+  @each $theme-name, $theme-map in $themes {
+    $theme-map: $theme-map !global;
+
+    [data-theme="#{$theme-name}"] & {
+      @content;
+    }
+  }
+}
+
+//根据Key获取颜色的function
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+//获取背景颜色
+@mixin background-color($color) {
+  @include themeify {
+    background-color: themed($color) !important;
+  }
+}
+
+//获取字体颜色
+@mixin font-color($color) {
+  @include themeify {
+    color: themed($color) !important;
+  }
+}
+
+//获取边框颜色
+@mixin border-color($color) {
+  @include themeify {
+    border-color: themed($color) !important;
+  }
+}
+
+//获取边框渐变色
+@mixin border-linear($width, $from, $to, $radius) {
+  @include themeify {
+    border: $width solid transparent;
+    border-image: linear-gradient(45deg, themed($from), themed($to)) 1;
+    clip-path: inset(0 round $radius);
+  }
+}
+
+//获取阴影颜色
+@mixin box-shadow($hx, $vy, $spread, $color) {
+  @include themeify {
+    box-shadow: $hx $vy $spread themed($color) !important;
+  }
+}
+
+//获取背景色渐变
+@mixin linear-gradient($deg, $from, $to) {
+  @include themeify {
+    background-image: linear-gradient($deg, themed($from), themed($to));
+  }
+}
+
+//获取文字颜色渐变
+@mixin font-gradient($from, $to) {
+  @include themeify {
+    background-image: linear-gradient(to bottom, themed($from), themed($to));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+// 获取背景图片
+@mixin background-image($imgurl) {
+  @include themeify {
+    background-image: themed($imgurl);
+  }
+}

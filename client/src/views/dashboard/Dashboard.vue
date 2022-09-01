@@ -3,7 +3,7 @@
         <div class="title">后台管理系统</div>
         <div class="menus">
             <div v-for="(menu, index) in menus" @click="toPage(menu)">
-                {{  menu.name  }}
+                {{ menu.name }}
             </div>
         </div>
         <div class="content">

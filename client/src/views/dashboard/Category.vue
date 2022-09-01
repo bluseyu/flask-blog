@@ -11,8 +11,8 @@
             </thead>
             <tbody>
                 <tr v-for="(category, index) in categoryList">
-                    <td>{{  category.id  }}</td>
-                    <td>{{  category.name  }}</td>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
                     <td>
                         <n-space>
                             <n-button @click="toUpdate(category)">修改</n-button>
@@ -153,4 +153,11 @@ const deleteCategory = async (category) => {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/variable";
+@import "../../assets/scss/mixin";
+
+.section {
+    width: 90%;
+    margin: 30px auto;
+}
 </style>
