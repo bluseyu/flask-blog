@@ -2,12 +2,14 @@ const express = require("express")
 const router = express.Router()
 const { db, genid } = require("../db/DbUtils")
 
-
+// 查询单篇博客内容
 router.get("/detail", async (req, res) => {
 
+    // 查询的是哪一篇文章
     let { id } = req.query
     let detail_sql = "SELECT * FROM `blog` WHERE `id` = ? "
-    let { err, rows } = await db.async.all(detail_sql, [id]) ;
+    // 访问值
+    let { err, rows } = await db.async.all(detail_sql, [id]);
 
     if (err == null) {
         res.send({
@@ -63,7 +65,7 @@ router.get("/search", async (req, res) => {
     }
 
     //查分页数据
-    let searchSql = " SELECT `id`,`category_id`,`create_time`,`title`,substr(`content`,0,50) AS `content` FROM `blog` " + whereSqlStr + " ORDER BY `create_time` DESC LIMIT ?,? "
+    let searchSql = " SELECT `id`,`category_id`,`create_time`,`title`, substr(`content`,0,200) AS `content` FROM `blog` " + whereSqlStr + " ORDER BY `create_time` DESC LIMIT ?,? "
     // 1 10  2,10    3,5
     // 0,10  10,10   10,5
     let searchSqlParams = params.concat([(page - 1) * pageSize, pageSize])

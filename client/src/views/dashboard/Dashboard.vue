@@ -50,6 +50,7 @@ const toPage = (menu) => {
 }
 
 .menus {
+    position: fixed;
     padding: 20px 0;
     box-sizing: border-box;
     line-height: 55px;
@@ -69,6 +70,7 @@ const toPage = (menu) => {
 
 .content {
     width: calc(100% - 180px);
+    margin-left: 180px;
 }
 
 .title {
