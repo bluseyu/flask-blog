@@ -11,6 +11,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+
+    --container-width: 1200px;
 }
 
 body {
@@ -18,9 +20,92 @@ body {
     padding: 0;
     width: 100%;
     min-height: 100vh;
+    /* background: rgb(18, 17, 16, 0.03); */
+}
+
+html[data-theme="light"] body,
+html[data-theme="dusk"] body,
+html[data-theme="volcano"] body,
+html[data-theme="aurora"] body {
+    background: rgb(18 17 16 / 5%);
+}
+
+html[data-theme="dark"] body {
+    background: rgb(8 7 6 / 90%);
 }
 
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
+}
+
+li {
+    list-style-type: none;
+}
+
+.w-e-text-container {
+    min-height: 400px;
+    padding: 10px 25px;
+}
+
+.n-pagination {
+    margin-top: 30px;
+    justify-content: flex-end;
+}
+
+.carousel-img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.container {
+    position: relative;
+    margin: 0 auto;
+}
+
+nav .container,
+.main .container {
+    width: var(--container-width);
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer {
+    width: 1200px;
+    margin: 50px auto 20px;
+    text-align: center;
+}
+
+.list-item .n-card>.n-card__content {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+}
+
+
+.list-item .blog-intro {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.list-item .blog-intro p {
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+}
+
+@media only screen and (min-width: 1440px) {
+    .list-item .blog-intro {
+        min-height: 50px;
+        max-height: 96px;
+    }
+}
+
+.blog img {
+    max-width: 100%;
 }

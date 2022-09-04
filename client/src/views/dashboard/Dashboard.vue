@@ -16,6 +16,7 @@
 import { AdminStore } from '../../stores/AdminStore'
 import { ref, reactive, inject } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+
 const router = useRouter()
 const route = useRoute()
 
@@ -26,6 +27,7 @@ const adminStore = AdminStore()
 
 //菜单
 let menus = [
+    { name: "返回首页", href: "/" },
     { name: "文章管理", href: "/dashboard/article" },
     { name: "分类管理", href: "/dashboard/category" },
     { name: "退出", href: "logout" },
@@ -39,9 +41,13 @@ const toPage = (menu) => {
         router.push(menu.href)
     }
 }
+
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/variable";
+@import "../../assets/scss/mixin";
+
 .main-panel {
     display: flex;
     margin: 0 auto;
@@ -57,6 +63,7 @@ const toPage = (menu) => {
     text-align: center;
     width: 180px;
     height: 100vh;
+    background: white;
     border-right: 1px solid #dadada;
 
     div {
@@ -64,6 +71,12 @@ const toPage = (menu) => {
 
         &:hover {
             color: #fd760e;
+        }
+
+        &:first-child {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgb(10 10 10 / 10%);
         }
     }
 }

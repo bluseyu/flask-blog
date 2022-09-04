@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+@import "./variable";
+@import "./mixin";
+
+nav {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  z-index: 1000;
+  background: white;
+  box-shadow: 0 0 5px rgb(0 0 0 / 8%);
+
+  .nav {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px 0;
+    justify-content: start;
+    font-size: 1rem;
+
+    li {
+      min-width: 50px;
+      max-width: 120px;
+      padding: 10px 20px;
+      list-style-type: none;
+      cursor: pointer;
+    }
+
+    span {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+  }
+
+  .actions {
+    @extend %flexbox;
+    width: 27%;
+    justify-content: space-between;
+
+    .menu-sub {
+      position: relative;
+      margin-top: 12px;
+      zoom: 1;
+
+      .menu-sub-item {
+        position: absolute;
+        width: 40px;
+        height: 0;
+        left: 50%;
+        top: 20px;
+        margin-left: -28px;
+        padding: 8px;
+        background: white;
+        text-align: center;
+        @extend %hide;
+
+        li {
+          width: 100%;
+          line-height: 30px;
+          cursor: pointer;
+        }
+      }
+
+      &:hover {
+        height: 136px;
+        background-color: white;
+
+        .menu-sub-item {
+          @extend %show;
+        }
+      }
+    }
+  }
+
+  .logo {
+    width: 80px;
+    height: 30px;
+    margin: 20px 0 0;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .search {
+    margin: 12px 0 0;
+
+    .n-input {
+      width: 180px;
+    }
+  }
+}
+
+.header {
+  position: relative;
+  width: 100%;
+  padding: 60px 0 20px;
+
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    margin: 0;
+    background: black;
+  }
+
+  .carousel-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    & {
+      :nth-child(2) {
+        .carousel-img {
+          animation-delay: 3s;
+        }
+      }
+
+      :nth-child(3) {
+        .carousel-img {
+          animation-delay: 6s;
+        }
+      }
+    }
+  }
+
+  .carousel-img {
+    height: 320px;
+    @extend %animationBase;
+    @include animation(fadeOut 8s infinite ease-in-out);
+  }
+}
+
+.main {
+  min-height: 768px;
+
+  .container {
+    flex-wrap: wrap;
+  }
+
+  .list-item {
+    width: 49%;
+    margin-top: 15px;
+    cursor: pointer;
+
+    .blog-intro {
+      margin: -0.5rem 1.5rem 1rem;
+    }
+  }
+}

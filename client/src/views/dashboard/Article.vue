@@ -2,8 +2,8 @@
     <div class="section">
         <!-- 标签页双向绑定 -->
         <n-tabs v-model:value="tabValue" justify-content="start" type="line">
-            <n-tab-pane name="list" tab="文章列表">
-                <div v-for="(blog, index) in blogListInfo">
+            <n-tab-pane name="list" tab="文章列表" class="word-list">
+                <div v-for="(blog, index) in blogListInfo" class="list-item">
                     <n-card :title="blog.title">
                         {{ blog.content }}
                         <template #footer>
@@ -11,12 +11,12 @@
                                 <div>发布时间: {{ blog.create_time }}</div>
                                 <!-- 点击修改跳到修改页面 -->
                                 <n-button @click="toUpdate(blog)">修改</n-button>
-                                <n-button>删除</n-button>
+                                <n-button @click="toDelete(blog)">删除</n-button>
                             </n-space>
                         </template>
                     </n-card>
                 </div>
-                <n-space>
+                <n-space class="page-num">
                     <n-button @click="toPage(pageNum)" v-for="pageNum in pageInfo.pageCount">
                         <!-- <div :style="'color:' + (pageNum == pageInfo.page ? 'red' : '')">{{ pageNum }}</div> -->
                         <div :class="(pageNum == pageInfo.page ? 'active' : '')">{{ pageNum }}</div>
@@ -58,7 +58,6 @@
                 </n-form>
             </n-tab-pane>
         </n-tabs>
-        <!-- {{ addArticle.content }} -->
     </div>
 </template>
 
@@ -101,7 +100,7 @@ const tabValue = ref("list")
 const pageInfo = reactive({
     page: 1,
     // 默认每页显示条数
-    pageSize: 3,
+    pageSize: 4,
     // 页数，默认为0
     pageCount: 0,
     // 文章数目服务端会传过来，默认为0
@@ -114,7 +113,7 @@ onMounted(() => {
     loadCategorys()
 })
 
-// 在现实的内容后加`...`
+// 在文章的content后加`...` 读取blog列表
 const loadBlogs = async () => {
     // let res = await axios.get("/blog/search")
     // 用模板方式传值，实现分页
@@ -146,13 +145,18 @@ const loadCategorys = async () => {
     console.log(categortyOptions.value)
 }
 
-// 新增文章提交 文章提交逻辑不严谨，需要全部不为空才能提交
+// 新增文章提交
 const add = async () => {
     let res = await axios.post("/blog/_token/add", addArticle)
     if (res.data.code == 200) {
         message.info(res.data.msg)
+        // 提交时清空标题、分类、内容
         addArticle.title = ""
         addArticle.categoryId = ""
+        addArticle.content = ""
+        // 将数据传给服务端
+        loadBlogs()
+        tabValue.value = "list"
     } else {
         message.error(res.data.msg)
     }
@@ -182,9 +186,45 @@ const update = async () => {
     let res = await axios.put("/blog/_token/update", updateArticle)
     if (res.data.code == 200) {
         message.info(res.data.msg)
+        loadBlogs()
+        tabValue.value = "list"
     } else {
         message.error(res.data.msg)
     }
+}
+
+// 删除文章
+/*
+const toDelete = async (blog) => {
+    let res = await axios.delete("/blog/_token/delete?id=" + blog.id)
+    if (res.data.code == 200) {
+        message.info(res.data.msg)
+        loadBlogs()
+    } else {
+        message.error(res.data.msg)
+    }
+};
+*/
+
+// 删除文章 为防止误删，删除前需要先确认
+const toDelete = async (blog) => {
+
+    dialog.warning({
+        title: '警告',
+        content: '是否要删除',
+        positiveText: '确定',
+        negativeText: '取消',
+        onPositiveClick: async () => {
+            let res = await axios.delete("/blog/_token/delete?id=" + blog.id)
+            if (res.data.code == 200) {
+                message.info(res.data.msg)
+                loadBlogs()
+            } else {
+                message.error(res.data.msg)
+            }
+        }
+    })
+
 }
 
 // 需要写一个组件封装富文本
@@ -196,7 +236,21 @@ const update = async () => {
 
 .section {
     width: 90%;
-    margin: 30px auto;
+    margin: 20px auto;
+}
+
+.word-list {
+    position: relative;
+    height: 800px;
+}
+
+.list-item {
+    margin-top: 15px;
+}
+
+.page-num {
+    position: absolute;
+    bottom: 0;
 }
 
 button {

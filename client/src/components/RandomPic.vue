@@ -1,10 +1,13 @@
 <template>
-    <router-view></router-view>
+    <div class="banner">
+
+    </div>
 </template>
 
-<script setup>
+<script>
 
 </script>
+
 
 <style lang="scss" scoped>
 </style>

@@ -3,7 +3,7 @@
 @import "./variable";
 
 /**
-* light: 光明 !default
+* light: 光明 白天 !default
 * dark：暗黑
 * dusk: 薄暮
 * volcano: 火山
@@ -13,4 +13,8 @@
 $themes: (
   light: (),
   dark: (),
+  dusk: (),
+  volcano: (),
+  aurora: (),
+  geek: (),
 );

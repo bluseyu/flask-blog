@@ -79,6 +79,6 @@ const login = async () => {
 <style lang="scss" scoped>
 .login-panel {
     width: 480px;
-    margin: 40px auto;
+    margin: 10% auto 0;
 }
 </style>

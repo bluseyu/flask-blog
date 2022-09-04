@@ -29,14 +29,13 @@ router.get("/detail", async (req, res) => {
 //查询博客
 router.get("/search", async (req, res) => {
 
-
     /**
      * keyword 关键字
      * categoryId 分类编号
      * 
      * 分页：
      * page 页码
-     * pageSize 分页大小
+     * pageSize 分页大小 服务端数据分页
      * 
      */
     let { keyword, categoryId, page, pageSize } = req.query
@@ -65,7 +64,7 @@ router.get("/search", async (req, res) => {
     }
 
     //查分页数据
-    let searchSql = " SELECT `id`,`category_id`,`create_time`,`title`, substr(`content`,0,200) AS `content` FROM `blog` " + whereSqlStr + " ORDER BY `create_time` DESC LIMIT ?,? "
+    let searchSql = " SELECT `id`,`category_id`,`create_time`,`title`,substr(`content`,0,128) AS `content` FROM `blog` " + whereSqlStr + " ORDER BY `create_time` DESC LIMIT ?,? "
     // 1 10  2,10    3,5
     // 0,10  10,10   10,5
     let searchSqlParams = params.concat([(page - 1) * pageSize, pageSize])
