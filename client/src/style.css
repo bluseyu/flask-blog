@@ -45,7 +45,41 @@ li {
 
 .w-e-text-container {
     min-height: 400px;
+    max-height: 500px;
     padding: 10px 25px;
+    overflow-y: auto;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-wrap;
+
+}
+
+.blog blockquote,
+.blog p,
+.blog pre {
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.blog p,
+.blog pre {
+    width: 97%;
+}
+
+.blog pre {
+    padding: 10px 15px;
+    background: rgb(18 17 16 / 4%);
+    border: 1px solid rgb(18 17 16 / 8%);
+    border-radius: 4px;
+}
+
+.blog blockquote {
+    width: 95%;
+    margin: 10px 0;
+    padding: 0 15px 0 20px;
+    border-left: 3px solid #ddd;
+    opacity: 0.75;
 }
 
 .n-pagination {

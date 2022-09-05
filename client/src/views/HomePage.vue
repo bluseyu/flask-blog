@@ -93,7 +93,7 @@ const blogListInfo = ref([])
 const pageInfo = reactive({
     page: 1,
     // 默认每页显示条数
-    pageSize: 8,
+    pageSize: 10,
     // 页数，默认为0
     pageCount: 0,
     count: 0,

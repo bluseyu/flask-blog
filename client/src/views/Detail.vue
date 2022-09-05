@@ -16,6 +16,7 @@
             <div class="container">
                 <section class="blog">
                     <n-h1>{{ blogInfo.title }}</n-h1>
+                    <!-- <span> 发布时间：{{ blogInfo.create_time }}</span> -->
                     <div class="blog-content">
                         <div class="content" v-html="blogInfo.content"></div>
                     </div>
@@ -52,6 +53,7 @@ onMounted(() => {
 const loadBlog = async () => {
     //获取首页跳转过来的文章ID
     let res = await axios.get("/blog/detail?id=" + route.query.id)
+
     // 读取文章的数据
     blogInfo.value = res.data.rows[0];
 }
