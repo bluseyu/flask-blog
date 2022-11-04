@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+// 淡入淡出
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+@keyframes fadeInA {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  25%,
+  100% {
+    opacity: 0.4;
+  }
+}
+@keyframes fadeInB {
+  0%,
+  20% {
+    opacity: 0.4;
+  }
+  25%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.4;
+  }
+}
+@keyframes fadeInC {
+  0%,
+  50% {
+    opacity: 0, 4;
+  }
+  50%,
+  70% {
+    opacity: 1;
+  }
+  75%,
+  100% {
+    opacity: 0.4;
+  }
+}
+@keyframes fadeInD {
+  0%,
+  70% {
+    opacity: 0.4;
+  }
+  75%,
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+// 颜色动画
+@keyframes animateColor {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.animateColor {
+  -webkit-animation-name: animateColor;
+  animation-name: animateColor;
+}

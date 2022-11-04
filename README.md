@@ -1,3 +1,56 @@
+# FlaskBlog
 
-[VUE3入门级全栈项目实战-博客开发教程(完结)](https://www.bilibili.com/video/BV1t3411F7VH?p=1&vd_source=0ac42703f8a41caff2a16f3c58a71c14)
-[项目代码](https://gitee.com/mingmingmingge/course-code)
+#### 介绍
+根据《Flask从零博客项目开发实战》视频教程 ，按照葫芦画瓢敲的代码，暂时没出什么问题，能跑起来。
+
+flask最大的优点就是轻量，简单。
+
+flask是一个微框架，微即代表它内置的东西非常少，也使其更具灵活性，但越灵活的东西就越需要多的知识储备，更需要自己有更强的编程能力，很多功能需要自己去实现，或者依赖第三方框架， 过多的依赖第三方框架无疑会增加学习成本，同时项目的未来也会有很多不确定性，某个第三方依赖一旦爆出问题或者不再维护，也会直接影响到我们的项目。
+
+
+#### 软件架构
+采用Python3编写，Python版本3.10，使用 Flask框架（版本2.1） + MySQL数据库 +  BulmaUI框架 构建的FllaskBlog。
+
+
+#### 安装教程
+
+1. 开发环境：安装Pytnon3.10，MySQL8.0
+2. 在Python虚拟环境进行开发
+
+Python3已经集成了虚拟环境，windows系统下，使用虚拟环境的步骤如下：
+1）在项目文件夹输入如下指令创建虚拟环境：
+``` shell
+$ py -3 -m venv venv
+```
+
+2）激活虚拟环境：
+``` shell
+$ venv\Scripts\activate
+```
+
+激活虚拟环境后，项目路径前会显示 `(venv)`
+
+3）退出虚拟环境：
+``` shell
+(venv) $ deactivate
+```
+
+3. 安装项目依赖
+虚拟环境下，安装依赖包列表
+``` shell
+(venv) $ pip install -r req.txt
+```
+
+`req.txt` 位于项目根目录下，记录了项目的各种依赖包以及版本号。
+
+4. 运行项目
+
+``` shell
+(venv) $ py manage.py
+```
+
+#### 使用说明
+
+1. 未登录用户可以浏览博客文章，无法对文章进行任何操作
+2. 用户需先注册再登录
+3. 支持用Markdown写文章

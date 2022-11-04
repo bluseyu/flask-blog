@@ -1,0 +1,219 @@
+@charset "UTF-8";
+
+// @mixin       调用：@include name()
+// @function   调用：直接使用函数名 name()
+// %name       调用：@extend %name
+
+// 定义屏幕大小
+$breakpoints: (
+  "mb": "only screen and (max-width: 576px)",
+  "xs": "only screen and (min-width: 480px)",
+  "sm": "only screen and (min-width: 768px)",
+  "md": "only screen and (min-width: 992px)",
+  "lg": "only screen and (min-width: 1200px)",
+  "pc": "only screen and (min-width: 1440px)",
+  "pc-m": "only screen and (min-width: 1650px)",
+  "pc-l": "only screen and (min-width: 1920px)",
+) !default;
+
+// 媒体查询
+@mixin respond-to($breakpoint) {
+  $query: map-get($breakpoints, $breakpoint);
+  // 如果超出设定范围则提示错误
+  @if not $query {
+    @error "No value found for '#{$breakpoint}'. Please make sure it is defined in '$breakpoints' map.";
+  }
+  // 断点，校验$query的合法性
+  @media #{if(type-of($query) == 'string', unquote($query), inspect($query))} {
+    @content;
+  }
+}
+
+// 添加浏览器前缀
+@mixin css3($property, $value) {
+  @each $prefix in -webkit-, -moz-, -o-, "" {
+    #{$prefix}#{$property}: $value;
+  }
+}
+
+// ========== Text 文本相关 ========
+
+// 根据dpr计算font-size
+@mixin font-dpr($font-size) {
+  font-size: $font-size;
+
+  //[data-model="pad"] & { font-size: $font-size * 1.4; }
+  [data-dpr="2"] & {
+    font-size: $font-size * 2;
+  }
+
+  [data-dpr="3"] & {
+    font-size: $font-size * 3;
+  }
+}
+
+@mixin font_size($size) {
+  // 通过该函数设置字体大小
+  @include font-dpr($size);
+}
+
+// 超行溢出显示省略号
+@mixin overflow($num: 1, $fontSize: 0, $lineHeight: 1.5) {
+  display: -webkit-box;
+  -webkit-line-clamp: $num;
+  overflow: hidden;
+  //! autoprefixer: off
+  -webkit-box-orient: vertical;
+
+  // autoprefixer: on
+  @if $fontSize !=0 and $lineHeight {
+    //高度需要撑开
+    line-height: $lineHeight;
+
+    @if $lineHeight < 1.2 {
+      line-height: 1.2;
+      //最小需要1.2，否则在部分安卓机下第$num+1行会顶部漏出
+    }
+
+    height: $num * $fontSize * $lineHeight;
+
+    [data-dpr="2"] & {
+      height: $num * $fontSize * $lineHeight * 2 !important;
+    }
+
+    [data-dpr="3"] & {
+      height: $num * $fontSize * $lineHeight * 3 !important;
+    }
+  }
+}
+
+// 文字强制换行
+%word-break {
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+// 单行文字截断
+%text-truncate {
+  word-wrap: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden !important;
+}
+
+// 多行文字截断
+@mixin line-truncate($linenum: null) {
+  display: -webkit-box;
+  -webkit-line-clamp: $linenum;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// 文字隐藏
+%text-hide {
+  text-indent: -999rem;
+}
+
+// 字母大写
+%text-capital {
+  text-transform: uppercase;
+}
+
+// ========== layout 布局相关 ========
+
+// clear float 清除浮动
+%clear {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// 弹性盒属性
+%flexbox {
+  @include css3(display, flex);
+  @include css3(flex-flow, row);
+  @include css3(flex-wrap, wrap);
+  @include css3(box-pack, justify);
+}
+
+// 弹性盒比例自定义
+@mixin flex($num: null) {
+  -webkit-box-flex: $num;
+  -moz-box-flex: $num;
+  -webkit-flex: $num;
+  -ms-flex: $num;
+  flex: $num;
+}
+
+//  hide element 隐藏元素
+//  show element 显示元素
+%hide {
+  visibility: hidden;
+  opacity: 0;
+}
+@mixin hide() {
+  visibility: hidden;
+  opacity: 0;
+}
+%show {
+  visibility: visible;
+  opacity: 1;
+}
+@mixin show() {
+  visibility: visible;
+  opacity: 1;
+}
+
+// margin horizontal auto 水平居中
+%margin-horizontal-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+//deformation 变形：
+//      flipx 水平翻转
+//      flipy 垂直翻转
+//     rotate 旋转
+
+@mixin flipx() {
+  @include css3(transform, scaleX(-1));
+}
+@mixin flipy() {
+  @include css3(transform, scaleY(-1));
+}
+@mixin rotate($deg: null) {
+  @include css3(transform, rotate($deg));
+}
+
+// ========== animation 动画相关 ========
+
+// animation basic settings 动画基本设置
+%animationBase {
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+// transition 设置运动变形方式及时长
+@mixin transition($content: null) {
+  @include css3(transition, $content);
+}
+
+// animation 设置动画方式及时长
+@mixin animation($content: null) {
+  @include css3(animation, $content);
+}
+
+// ========== Other 其他 ========
+%bgimgset {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: auto 100%;
+}

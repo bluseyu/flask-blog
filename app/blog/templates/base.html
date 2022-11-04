@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}摸鱼歌的博客{% endblock title %}</title>
+    <link
+      rel="icon"
+      href="{{ url_for('blog.static', filename='img/icon.png') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('blog.static', filename='css/buefy.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('blog.static', filename='css/materialdesignicons.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('blog.static', filename='css/style.css') }}"
+    />
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">-->
+
+    {% block extra_head_style %}{% endblock extra_head_style %}
+  </head>
+
+  <body>
+    <div id="app" style="height: 100%">
+        <header>
+            <!-- 导航 -->
+          {% block navbar %}
+          <template>
+            <b-navbar spaced shadow>
+              <template #brand>
+                <b-navbar-item href="/">
+                  <img
+                    src="{{ url_for('blog.static', filename='img/logo1.png') }}"
+                    alt="FlaskBlog"
+                  />
+                </b-navbar-item>
+              </template>
+              <template #start>
+                <b-navbar-item href="/"> 首页 </b-navbar-item>
+                {% for cate in categorys %}
+                <b-navbar-item 
+                {% if cate.id==cate_id %} class="is-active"{% endif %}  href="{{ url_for('blog.cates', cate_id=cate.id) }}" >
+                  {{ cate.name }}
+                  </b-navbar-item>
+                {% endfor %}
+              </template>
+
+              <template #end>
+                <b-navbar-item tag="div">
+                  <!-- 判断用户是否已登录 -->
+                  {% if g.user %}
+                  <figure class="image">
+                    <img
+                      class="is-rounded"
+                      src="/admin/static/{{ g.user.avatar }}"
+                      alt="{{ g.user.username }}"
+                    />
+                  </figure>
+                  <div class="buttons">
+                    <!-- 获取用户信息 -->
+                    <a class="button is-link"
+                      >欢迎您 {{ g.user['username'] }}</a
+                    >
+                    {% if g.user.is_super_user %}
+                    <a class="button is-success" href="{{ url_for('admin.index') }}">管理后台</a>
+                    {% else %}
+                    <a class="button is-success" href="{{ url_for('auth.userinfo') }}">个人中心</a>
+                    {% endif %}
+                    <!-- 显示退出按钮 -->
+                    <a
+                      class="button is-danger"
+                      href="{{ url_for('auth.logout') }}"
+                      >退出</a
+                    >
+                  </div>
+                  {% else %}
+                  <!-- 用户未登录，显示登录注册按钮 -->
+                  <div class="buttons">
+                    <a
+                      class="button is-primary"
+                      href="{{ url_for('auth.register') }}"
+                    >
+                      <strong>注册</strong>
+                    </a>
+                    <a
+                      class="button is-light"
+                      href="{{ url_for('auth.login') }}"
+                      >登录</a
+                    >
+                  </div>
+                  {% endif %}
+                </b-navbar-item>
+              </template>
+            </b-navbar>
+          </template>
+          {% endblock navbar %}
+          <!-- 导航 end -->
+
+        </header>
+      <div class="container is-fluid1" style="height: 100%">
+        <div class="is-block" style="height: 100%">
+          {% block hero %}
+          <!--<section class="hero is-medium is-primary">
+            <div class="hero-body">
+              <p class="title">Large hero</p>
+              <p class="subtitle">Large subtitle</p>
+            </div>
+          </section>-->
+          <section class="banner">
+            <div class="carousel-item">
+                <img class="carousel-img" src="../blog/static/image/1.jpg" alt="">
+                <img class="carousel-img" src="../blog/static/image/2.jpg" alt="">
+                <img class="carousel-img" src="../blog/static/image/3.jpg" alt="">
+                <img class="carousel-img" src="../blog/static/image/4.jpg" alt="">
+            </div>
+            <div class="carousel-page">
+                <span href="#" class="carousel-has"></span>
+                <span href="#" class="carousel-has"></span>
+                <span href="#" class="carousel-has"></span>
+                <span href="#" class="carousel-has"></span>
+            </div>
+          </section>
+          {% endblock hero %}
+
+          <!-- note: -->
+          {% block main %}
+          <div class="box is-marginless is-shadowless is-radiusless">
+            {% block box %}
+            <div class="columns is-multiline">
+              <!-- 2022-9-17 目前没有数据，可以暂时传一假数据过来 -->
+              {% for post in posts %}
+              <div class="column is-4-fullhd">
+                <div class="card">
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src="{{ post.img }}" width="100%" />
+                    </figure>
+                  </div>
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-content">
+                        <p class="title is-4">
+                          <a
+                            href="{{ url_for('blog.detail', cate_id=post.category.id, post_id=post.id) }}"
+                          >
+                            {{ post.title }}
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="content word-info">
+                      <p class="has-text-grey is-size-8">{{ post.desc }}</p>
+                      <time datetime="{{ post.add_date }}" class="is-size-8">
+                        {{ post.add_date }}
+                      </time>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <nav
+              class="pagination is-small"
+              role="navigation"
+              aria-label="pagination"
+            >
+              {% if pagination.has_prev %}
+              <a
+                href="{{ url_for('index') }}?page={{ pagination.prev_num }}"
+                class="pagination-previous"
+                title="This is the first page"
+                >上一页</a
+              >
+              {% endif %} {% if pagination.has_next %}
+              <a
+                href="{{ url_for('index') }}?page={{ pagination.next_num }}"
+                class="pagination-next"
+                >下一页</a
+              >
+              {% endif %}
+
+              <ul class="pagination-list">
+                {% for page in pagination.iter_pages() %} {% if page %} {% if
+                page != pagination.page %}
+                <li>
+                  <a
+                    href="{{ url_for('index') }}?page={{ page }}"
+                    class="pagination-link"
+                    aria-label="Page 1"
+                    aria-current="page"
+                    >{{ page }}</a
+                  >
+                </li>
+                {% else %}
+                <li>
+                  <a
+                    class="pagination-link is-current"
+                    aria-label="Page 1"
+                    aria-current="page"
+                    >{{ page }}</a
+                  >
+                </li>
+                {% endif %} {% else %}
+                <span class="pagination-ellipsis">&hellip;</span>
+                {% endif %} {% endfor %}
+              </ul>
+            </nav>
+            {% endblock box %}
+          </div>
+          {% endblock main %} {% block footer %}
+          <div class="footer has-background-black-ter">
+            <div class="has-text-centered has-text-grey-light">
+              © 2022
+              <a
+                class="has-text-grey-light"
+                href="https://gitee.com/aimoyu/"
+                target="_blank"
+                >爱摸鱼</a
+              >
+              版权所有 备案号：沪ICP备20221234号
+            </div>
+          </div>
+          {% endblock footer %}
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('blog.static', filename='js/vue.js') }}"></script>
+    <script src="{{ url_for('blog.static', filename='js/buefy.min.js') }}"></script>
+    {% block extra_foot_script %}{% endblock extra_foot_script %}
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
+      });
+    </script>
+    {% block vue_script %}
+    {% endblock vue_script %}
+
+  </body>
+</html>

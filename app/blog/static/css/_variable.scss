@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+// Color Setting
+
+:root {
+  --page-bgcolor: hsl(0, 0%, 95%); // #f2f2f2 rgb(242, 242, 242)  $grey95
+  --color-primary: hsl(184, 79%, 41%);
+  --color-link: hsl(256, 60%, 56%); // #714dd2 rgb(111, 75, 120)
+  --color-danger: hsl(348, 86%, 61%); // #f14668 rgb(241, 70, 104)
+}
+
+$white: hsl(0, 0%, 100%); // white #fff rgb(255 255 255)
+
+$grey95: hsl(0, 0%, 95%); // #f2f2f2 rgb(242, 242, 242)
+$grey90: hsl(0, 0%, 90%); // #e6e6e6 rgb(230, 230, 230)
+$grey80: hsl(0, 0%, 80%); // #cccccc rgb(204, 204, 204)
+$grey75: hsl(0, 0%, 75%); // #bfbfbf rgb(191, 191, 191)
+$grey70: hsl(0, 0%, 70%); // #b3b3b3 rgb(179, 179, 179)
+$grey60: hsl(0, 0%, 60%); // #999999 rgb(153, 153, 153)
+$grey50: hsl(0, 0%, 50%); // #808080 rgb(128, 128, 128)
+$grey40: hsl(0, 0%, 40%); // #666666 rgb(102, 102, 102)
+$grey35: hsl(0, 0%, 35%); // #595959 rgb(89, 59, 59)
+$grey30: hsl(0, 0%, 30%); // #4d4d4d rgb(77, 77, 77)
+$grey25: hsl(0, 0%, 25%); // #404040 rgb(64, 64, 64)
+$grey20: hsl(0, 0%, 20%); // #333333 rgb(51, 51, 51)
+$grey10: hsl(0, 0%, 10%); // #1a1a1a rgb(26, 26, 26)
+$grey5: hsl(0, 0%, 5%); // #0d0d0d rgb(13, 13, 13)
+
+$black: hsl(0, 0%, 0%); // black #000 rgb(0 0 0)
+$black-blue: hsl(200, 8%, 8%); // #121415 rgb(18 20 21)
+$black-blue95: hsl(200, 6%, 10%); // #181a1b rgb(24 26 27)
+$black-blue90: hsl(200, 5%, 12%); // #1d1f20 rgb(29 31 32)
+$black-blue88: rgb(32, 34, 35); // #202223
+
+$grey-blue-light: hsl(210, 12%, 97%) !default;
+$grey-blue-light: hsl(208, 58%, 98%);
+
+$blue: hsl(212, 100%, 57%); // #248cff  rgb(36 140 255)
+$blue: hsl(207, 90%, 54%) !default; // #2196f3  rgb(33 150 243)
+
+$blue101: hsl(207, 90%, 54%); // #2196f3,  rgba(33, 150, 243, 1)
+$blue-light: hsl(212, 100%, 80%);
+$blue-dark: hsl(195, 6%, 13%); // #1e2122
+$blue-cyan-light: rgb(24, 214, 214);
+$blue-cyan-dark: hsl(184, 79%, 41%); // #16b2bd
+
+$cyan: rgb(41, 233, 244) !default; // #29e9f4  rgb(41 233 244)
+
+$cyan-light: hsl(183, 90%, 80%);
+$cyan-base: #00e8ff;
+
+$green-cyan: rgb(26, 246, 176);
+$green: rgb(24, 214, 154);
+
+$red: hsl(338, 100%, 53%); // #ff0f69 rgb(255 15 105)
+
+//  IMG Background
+$IMGURL: "../img/" !default;
+
+$logo-light: url(#{$IMGURL}logo_light.png);
+$logo-dark: url(#{$IMGURL}logo_dark.png);
+
+$bg-frame-1: url(#{$IMGURL}zhuzhen_1.png);
+$bg-frame-2: url(#{$IMGURL}zhuzhen_2.png);
+$bg-frame-3: url(#{$IMGURL}zhuzhen_3.png);
+$bg-bear: url(#{$IMGURL}bear.png);
+$bg-worm: url(#{$IMGURL}worm.png);
+$bg-frame-anim: $bg-bear;
+$bg-anim-run: url(#{$IMGURL}zhuzhen_4.png);
+$bg-anim-run-f: url(#{$IMGURL}zhuzhen_4_f.png);
+
+// Font size
+$font-size: 1rem;
+$font-size-xs: 0.8rem;
+$font-size-sm: 1.2rem;
+$font-size-md: 1.6rem;
+$font-size-lg: 2.4rem;
+
+// layout size
+$header-height: 68px;
+$aside-width: 200px;
+$logo-width: 68px;
+$logo-height: 40px;
+$main-width-pad: 90%;
+$main-width-pc: 1280px;
+$main-width-pc-m: 1440px;
+$main-width-pc-l: 1600px;
+$item-width-mb: 80% !default;
+
+$banner-height: 400px;
+
+// 1: w-184px,h-325px; 2: w-130px,h-6px; 3: w-140px,h-200px; bear: w-120px h-120px;
+$body-bg-anim-w: 120px;
+$body-bg-anim-h: 120px;
+
+$body-bg-run: 140px;
+$body-bg-worm: 50px;
+
+// radius size
+$radius: 8px;
+$radius-s: $radius / 2;
+$radius-sm: $radius-s * 3;
+$radius-m: $radius * 2;
+$radius-l: $radius * 4;
+
+$step-walk: 8;
+$step-run: 12;
+$step-worm: 13;
+
+$imgnum: 4;

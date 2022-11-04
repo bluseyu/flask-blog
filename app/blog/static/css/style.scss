@@ -1,0 +1,436 @@
+@charset "UTF-8";
+
+@import "./variable";
+@import "./mixin";
+@import "./animate";
+
+body {
+  background-color: var(--page-bgcolor);
+  min-height: 100vh;
+
+  &::before {
+    width: $body-bg-anim-w;
+    height: $body-bg-anim-h;
+    top: -1%;
+    right: -1%;
+    background: $bg-frame-anim;
+    animation: walk 1.5s steps($step-walk) infinite;
+  }
+  &::after {
+    left: 3%;
+    background: $bg-anim-run;
+  }
+}
+
+#app {
+  &::before {
+    width: $body-bg-worm;
+    height: $body-bg-worm;
+    top: 0;
+    left: 0;
+    background: $bg-worm;
+    animation: worm 2s steps($step-worm) infinite;
+  }
+  &::after {
+    right: 3%;
+    background: $bg-anim-run-f;
+  }
+}
+
+body,
+#app {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: fixed;
+    background-size: cover;
+    z-index: 15;
+
+    @include respond-to("md") {
+      display: none;
+    }
+  }
+  &::after {
+    content: "";
+    position: fixed;
+    width: $body-bg-run;
+    height: $body-bg-run;
+    bottom: 0;
+    background-size: cover;
+    animation: run 0.8s steps($step-run) infinite;
+  }
+}
+
+@keyframes walk {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -$body-bg-anim-w * $step-walk 0;
+  }
+}
+@keyframes run {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -$body-bg-run * $step-run 0;
+  }
+}
+@keyframes worm {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -$body-bg-worm * $step-worm 0;
+  }
+}
+
+a {
+  color: var(--color-primary);
+}
+
+button {
+  border-radius: $radius-s;
+}
+
+#app {
+  position: relative;
+
+  header {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    background: white;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+
+    .navbar {
+      margin: 0 auto;
+
+      &.is-spaced {
+        @include respond-to("pc") {
+          padding: 1rem 0;
+        }
+      }
+
+      @include respond-to("pc") {
+        width: $main-width-pc;
+      }
+    }
+  }
+
+  > .container {
+    padding-top: 88px;
+
+    @include respond-to("pc") {
+      width: $main-width-pc;
+    }
+  }
+}
+
+.navbar-start {
+  width: 60%;
+  padding-right: 0;
+}
+
+.box {
+  padding: 1.75rem;
+
+  &.is-marginless {
+    padding-bottom: 2.25rem;
+  }
+  &.has-background-light {
+    padding: 1.25rem;
+  }
+  &.is-aside {
+    border: 1px solid #eee;
+
+    a {
+      font-size: 90%;
+    }
+  }
+
+  .column {
+    padding: 1.25rem;
+  }
+}
+
+.navbar-item {
+  .button {
+    background: transparent;
+  }
+  .is-link {
+    color: var(--color-link);
+  }
+  .is-success {
+    //color: #48c78e;
+    color: var(--color-primary);
+  }
+  .is-danger {
+    color: var(--color-danger);
+  }
+
+  .image img {
+    max-height: 2.4rem;
+  }
+}
+// 顶部导航栏选中后样式
+a.navbar-item.is-active {
+  position: relative;
+  color: var(--color-primary);
+  font-weight: bold;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-primary);
+  }
+}
+
+.button.is-primary,
+.pagination-link.is-current {
+  background-color: var(--color-primary);
+}
+
+.pagination-link.is-current,
+.navbar-link:not(.is-arrowless)::after {
+  border-color: var(--color-primary);
+}
+
+.hero.is-primary {
+  background-color: transparent;
+  background: url(#{$IMGURL}banner.png) no-repeat 50% 75%;
+  background-size: 100% auto;
+
+  @include respond-to("pc") {
+    min-height: 380px;
+  }
+}
+
+.card {
+  margin-top: 15px;
+
+  .media:not(:last-child) {
+    margin-bottom: 0.8rem;
+  }
+
+  .is-size-8 {
+    font-size: 0.9rem;
+  }
+
+  .card-image:first-child {
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+.word-info {
+  .has-text-grey {
+    margin-bottom: 0.4rem !important;
+    min-height: 64px;
+    @include line-truncate(3);
+  }
+}
+
+.title.is-4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.pagination-list {
+  margin-top: 10px;
+}
+
+.footer {
+  margin-top: 0;
+  padding: 2em 0;
+}
+
+.image.is-4by3 {
+  padding-top: 0;
+  min-height: 225px;
+}
+
+// 图标
+.tag:not(body) {
+  font-size: 1rem;
+
+  .icon {
+    width: 2.2rem;
+  }
+}
+
+.img-preview {
+  margin: 15px 0;
+  width: 30%;
+  max-width: 640px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.media-content .title {
+  width: 350px;
+  @extend %text-truncate;
+}
+
+.breadcrumb.is-small {
+  font-size: 0.85rem;
+}
+
+.column {
+  &.is-9 {
+    border: none;
+
+    .has-text-grey {
+      color: #4a4a4a !important;
+    }
+
+    .info-text {
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  .has-text-grey-light {
+    margin-bottom: 1.5rem;
+  }
+
+  .box.is-aside {
+    margin-bottom: 0;
+
+    &:not(:first-child),
+    &:not(:last-child) {
+      border-radius: 0;
+    }
+    &:first-child {
+      border-radius: 6px 6px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 6px 6px;
+    }
+  }
+}
+// 文本编辑代码块样式
+.control {
+  textarea {
+    height: 400px;
+    font-size: 14px;
+    overflow-y: auto;
+  }
+}
+
+.content {
+  pre {
+    border-radius: 6px;
+  }
+
+  blockquote {
+    padding: 0 1.5rem;
+    margin: 0.5rem 0;
+    background-color: transparent;
+    opacity: 0.7;
+  }
+}
+
+.table-container {
+  a.tag {
+    font-size: 90%;
+  }
+}
+
+@keyframes switch {
+  0%,
+  20% {
+    margin-left: 0;
+    opacity: 1;
+  }
+  25%,
+  45% {
+    margin-left: -$main-width-pc * 1;
+  }
+  50%,
+  70% {
+    margin-left: -$main-width-pc * 2;
+  }
+  75%,
+  95% {
+    margin-left: -$main-width-pc * 3;
+    opacity: 1;
+  }
+  100% {
+    margin-left: -$main-width-pc * 3;
+    opacity: 0;
+  }
+}
+// banner
+.banner {
+  position: relative;
+  width: $main-width-pc;
+  height: $banner-height;
+  overflow: hidden;
+  background: white;
+  background: url(../image/1.jpg) no-repeat 50% 50%;
+  background-size: 100% auto;
+
+  .carousel-item {
+    width: $main-width-pc * $imgnum;
+    animation: switch 20s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  }
+
+  .carousel-img {
+    float: left;
+    height: $banner-height;
+    object-fit: cover;
+  }
+
+  .carousel-page {
+    position: absolute;
+    display: flex;
+    width: 20%;
+    height: 20px;
+    left: 40%;
+    bottom: 2%;
+
+    .carousel-has {
+      display: block;
+      flex: 1;
+      height: 10px;
+      background: white;
+      opacity: 0.4;
+      border-radius: 5px;
+
+      &:not(:last-child) {
+        margin-right: 1.5rem;
+      }
+
+      &:nth-child(1) {
+        animation: fadeInA 20s ease-in-out infinite;
+      }
+      &:nth-child(2) {
+        animation: fadeInB 20s ease-in-out infinite;
+      }
+      &:nth-child(3) {
+        animation: fadeInC 20s ease-in-out infinite;
+      }
+      &:nth-child(4) {
+        animation: fadeInD 20s ease-in-out infinite;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
