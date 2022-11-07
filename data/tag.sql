@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `name` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  flaskblog.tag 的数据：~35 rows (大约)
+-- 正在导出表  flaskblog.tag 的数据：~38 rows (大约)
 INSERT INTO `tag` (`add_date`, `pub_date`, `id`, `name`) VALUES
 	('2022-10-09 16:12:27', '2022-10-09 16:12:27', 1, 'Python'),
 	('2022-10-09 16:13:03', '2022-10-09 16:13:03', 2, 'Flask'),
@@ -65,7 +65,10 @@ INSERT INTO `tag` (`add_date`, `pub_date`, `id`, `name`) VALUES
 	('2022-10-19 09:46:28', '2022-10-19 09:46:28', 32, '美女'),
 	('2022-10-19 14:38:23', '2022-10-19 14:38:23', 33, '认知'),
 	('2022-10-19 17:07:26', '2022-10-19 17:07:26', 34, '武学'),
-	('2022-10-20 09:20:21', '2022-10-20 09:20:21', 35, '书法');
+	('2022-10-20 09:20:21', '2022-10-20 09:20:21', 35, '书法'),
+	('2022-11-07 11:42:18', '2022-11-07 11:42:18', 36, '人性'),
+	('2022-11-07 11:42:18', '2022-11-07 11:42:18', 37, '人世间'),
+	('2022-11-07 16:42:24', '2022-11-07 16:42:24', 38, '历史');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
   CONSTRAINT `tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  flaskblog.tags 的数据：~43 rows (大约)
+-- 正在导出表  flaskblog.tags 的数据：~45 rows (大约)
 INSERT INTO `tags` (`tag_id`, `post_id`) VALUES
 	(1, 1),
 	(2, 1),
@@ -73,7 +73,9 @@ INSERT INTO `tags` (`tag_id`, `post_id`) VALUES
 	(18, 34),
 	(34, 34),
 	(18, 35),
-	(34, 35);
+	(34, 35),
+	(33, 37),
+	(18, 38);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
